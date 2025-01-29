@@ -58,4 +58,4 @@ jobs:
           --username=$LIQUIBASE_USER \
           --password=$LIQUIBASE_PASSWORD \
           --changeLogFile=changelog/db.changelog-master.xml \
-          rollback 1004
+          ./liquibase rollback nivethidhas:1004
