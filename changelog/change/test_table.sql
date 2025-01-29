@@ -1,5 +1,3 @@
-liquibase --changeLogFile=path/to/changelog.xml update
-  
 USE SCHEMA SCH;
 CREATE OR REPLACE TABLE TEST_TABLE
 (
