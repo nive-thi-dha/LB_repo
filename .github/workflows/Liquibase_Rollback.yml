@@ -49,14 +49,11 @@ jobs:
       run: ./liquibase validate
 
     - name: Rollback to a specific date using Liquibase
-  env:
-    LIQUIBASE_USER: ${{ secrets.SF_USER }}
-    LIQUIBASE_PASSWORD: ${{ secrets.SF_PASSWORD }}
-    run: |
-    LIQUIBASE_ROLLBACK_DATE="2025-01-29T15:50:00"
-    echo "Rolling back changes before $LIQUIBASE_ROLLBACK_DATE..."
-    liquibase \
-      --username=$LIQUIBASE_USER \
-      --password=$LIQUIBASE_PASSWORD \
-      --changeLogFile=path/to/changelog.xml \
-      rollbackToDate $LIQUIBASE_ROLLBACK_DATE
+      run: |
+        LIQUIBASE_ROLLBACK_DATE="2025-01-29T15:50:00"
+        echo "Rolling back changes before $LIQUIBASE_ROLLBACK_DATE..."
+        liquibase \
+          --username=$LIQUIBASE_USER \
+          --password=$LIQUIBASE_PASSWORD \
+          --changeLogFile=path/to/changelog.xml \
+          rollbackToDate $LIQUIBASE_ROLLBACK_DATE
