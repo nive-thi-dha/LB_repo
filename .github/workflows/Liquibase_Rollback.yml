@@ -51,10 +51,11 @@ jobs:
         LIQUIBASE_USER: ${{ secrets.SF_USERNAME }}
         LIQUIBASE_PASSWORD: ${{ secrets.SF_PASSWORD }}
       run: |
-        echo "Rolling back changes..."
+        ROLLBACK_COUNT="${{ github.event.inputs.rollback_count }}"
+        echo "Rolling back last $ROLLBACK_COUNT changes..."
         liquibase \
           --username=$LIQUIBASE_USER \
           --password=$LIQUIBASE_PASSWORD \
           --changeLogFile=changelog/db.changelog-master.xml \
-          ./liquibase rollback nivethidhas:1004
-          fi
+          ./liquibase rollbackCount $ROLLBACK_COUNT
+          
