@@ -1,5 +1,6 @@
 --liquibase formatted sql
 
+-- changeset nivethidhas:1003
 USE SCHEMA SCH;
 CREATE OR REPLACE TABLE TEST_TABLE3
 (
