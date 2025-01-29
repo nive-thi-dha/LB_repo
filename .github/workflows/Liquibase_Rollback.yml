@@ -48,8 +48,15 @@ jobs:
     - name: Validate Liquibase Changelog
       run: ./liquibase validate
 
-    - name: Rollback Changes
-      run: |
-        ROLLBACK_COUNT="${{ github.event.inputs.rollback_count }}"
-        echo "Rolling back last $ROLLBACK_COUNT changes..."
-        ./liquibase rollbackCount $ROLLBACK_COUNT
+    - name: Rollback to a specific date using Liquibase
+  env:
+    LIQUIBASE_USER: ${{ secrets.SF_USER }}
+    LIQUIBASE_PASSWORD: ${{ secrets.SF_PASSWORD }}
+    run: |
+    LIQUIBASE_ROLLBACK_DATE="2025-01-29T16:01:00"
+    echo "Rolling back changes before $LIQUIBASE_ROLLBACK_DATE..."
+    liquibase \
+      --username=$LIQUIBASE_USER \
+      --password=$LIQUIBASE_PASSWORD \
+      --changeLogFile=path/to/changelog.xml \
+      rollbackToDate $LIQUIBASE_ROLLBACK_DATE
