@@ -53,8 +53,7 @@ jobs:
         LIQUIBASE_USER: ${{ secrets.SF_USERNAME }}
         LIQUIBASE_PASSWORD: ${{ secrets.SF_PASSWORD }}
       run: |
-        LIQUIBASE_ROLLBACK_DATE="2025-01-29T15:50:52"
-        echo "Rolling back changes before $LIQUIBASE_ROLLBACK_DATE..."
+        echo "Rolling back changes..."
         liquibase \
           --username=$LIQUIBASE_USER \
           --password=$LIQUIBASE_PASSWORD \
