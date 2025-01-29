@@ -22,10 +22,13 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Install Liquibase
+    - name: Setup Liquibase
       run: |
-        curl -L https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0-linux-x64.tar.gz | tar xz
-        sudo mv liquibase /usr/local/bin/
+        wget https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz
+        tar xzf liquibase-4.20.0.tar.gz
+        chmod +x liquibase
+        mkdir -p lib/
+        wget https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.13.30/snowflake-jdbc-3.13.30.jar -O lib/snowflake-jdbc.jar
 
     - name: Create Liquibase Properties
       run: |
