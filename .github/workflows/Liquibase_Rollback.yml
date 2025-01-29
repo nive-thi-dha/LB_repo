@@ -25,7 +25,6 @@ jobs:
     - name: Setup Liquibase
       run: |
         wget https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz
-        sudo mv liquibase /usr/local/bin/
         tar xzf liquibase-4.20.0.tar.gz
         chmod +x liquibase
         mkdir -p lib/
