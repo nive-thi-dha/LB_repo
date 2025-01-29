@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeSet id="4" author="dev"
+-- changeset nivethidhas:1004
 USE SCHEMA SCH;
 CREATE OR REPLACE TABLE TEST_TABLE4
 (
