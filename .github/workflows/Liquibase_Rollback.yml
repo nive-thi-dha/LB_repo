@@ -58,5 +58,5 @@ jobs:
         liquibase \
           --username=$LIQUIBASE_USER \
           --password=$LIQUIBASE_PASSWORD \
-          --changeLogFile=path/to/changelog.xml \
-          rollbackToDate $LIQUIBASE_ROLLBACK_DATE
+          --changeLogFile=changelog/db.changelog-master.xml \
+          rollback 1004
