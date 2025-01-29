@@ -6,7 +6,7 @@ on:
     inputs:
       rollback_count:
         description: "Number of changes to rollback"
-        required: false
+        required: true
         default: "1"
 
 jobs:
@@ -22,13 +22,10 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Setup Liquibase
+    - name: Install Liquibase
       run: |
-        wget https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz
-        tar xzf liquibase-4.20.0.tar.gz
-        chmod +x liquibase
-        mkdir -p lib/
-        wget https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.13.30/snowflake-jdbc-3.13.30.jar -O lib/snowflake-jdbc.jar
+        curl -L https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0-linux-x64.tar.gz | tar xz
+        sudo mv liquibase /usr/local/bin/
 
     - name: Create Liquibase Properties
       run: |
@@ -39,8 +36,6 @@ jobs:
         password: ${{ secrets.SF_PASSWORD }}
         changeLogFile: changelog/db.changelog-master.xml
         EOF
-
-        
 
     - name: Run Liquibase Status
       run: ./liquibase status
