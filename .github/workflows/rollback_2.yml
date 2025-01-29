@@ -3,8 +3,8 @@ name: Liquibase rollback_2
 on:
   push:
     branches:
-      - changelog/change/rollback
-    workflow_dispatch:
+      - '**/rollback'
+  workflow_dispatch:
 
 jobs:
   database-migration:
