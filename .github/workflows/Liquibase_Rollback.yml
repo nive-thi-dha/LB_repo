@@ -6,7 +6,7 @@ on:
     inputs:
       rollback_count:
         description: "Number of changes to rollback"
-        required: true
+        required: false
         default: "1"
 
 jobs:
@@ -27,7 +27,6 @@ jobs:
         wget https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz
         tar xzf liquibase-4.20.0.tar.gz
         chmod +x liquibase
-        sudo mv liquibase /usr/local/bin/
         mkdir -p lib/
         wget https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.13.30/snowflake-jdbc-3.13.30.jar -O lib/snowflake-jdbc.jar
 
@@ -41,24 +40,16 @@ jobs:
         changeLogFile: changelog/db.changelog-master.xml
         EOF
 
+        
+
     - name: Run Liquibase Status
       run: ./liquibase status
 
     - name: Validate Liquibase Changelog
       run: ./liquibase validate
 
-    - name: Rollback to a specific date using Liquibase
-      env:
-        LIQUIBASE_USER: ${{ secrets.SF_USERNAME }}
-        LIQUIBASE_PASSWORD: ${{ secrets.SF_PASSWORD }}
+    - name: Rollback Changes
       run: |
-        DEPLOYMENT_ID="${{ github.event.inputs.deployment_id }}"
-        echo "Rolling back deployment with ID $DEPLOYMENT_ID..."
-        liquibase \
-          --username=$LIQUIBASE_USER \
-          --password=$LIQUIBASE_PASSWORD \
-          --changeLogFile=changelog/db.changelog-master.xml \
-          rollbackOneUpdate \
-          --deploymentid=$DEPLOYMENT_ID \
-          --force
-          
+        ROLLBACK_COUNT="${{ github.event.inputs.rollback_count }}"
+        echo "Rolling back last $ROLLBACK_COUNT changes..."
+        ./liquibase rollbackCount $ROLLBACK_COUNT
