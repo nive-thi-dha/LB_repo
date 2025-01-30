@@ -1,0 +1,21 @@
+--liquibase formatted sql
+
+-- changeset nivethidhas:1009
+USE SCHEMA SCH;
+CREATE OR REPLACE TABLE TEST_TABLE8
+(
+   FIRST_NAME VARCHAR
+  ,LAST_NAME VARCHAR
+);
+
+--rollback DROP TABLE TEST_TABLE8;
+
+-- changeset nivethidhas:1010
+USE SCHEMA SCH;
+CREATE OR REPLACE TABLE TEST_TABLE9
+(
+   FIRST_NAME VARCHAR
+  ,LAST_NAME VARCHAR
+);
+
+--rollback DROP TABLE TEST_TABLE9;
